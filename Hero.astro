@@ -1,0 +1,12 @@
+---
+const { hero } = Astro.props;
+---
+<section style="background: radial-gradient(600px 200px at 20% -20%, rgba(91,225,197,.25), transparent), #f8fafc; padding: 2.5rem 0;">
+  <div class="container">
+    <h1 style="font-size:clamp(2rem,5vw,3rem); margin:0 0 1rem">{hero?.headline || 'Build once. Sell for years.'}</h1>
+    <p style="max-width:60ch; color:#334155">{hero?.subhead || 'Launch your digital product store in minutes.'}</p>
+    <div style="margin-top:1rem">
+      <a class="btn" href="#products">{hero?.cta || 'Shop Now'}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+---
+const { brand } = Astro.props;
+---
+<footer class="site container">
+  <div>&copy; {new Date().getFullYear()} {brand?.name || 'Your Brand'}</div>
+  <div style="margin-left:auto">
+    <a href="/policies">Policies</a>
+  </div>
+</footer>

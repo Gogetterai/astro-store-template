@@ -1,0 +1,83 @@
+{
+  "brand": {
+    "name": "Your Brand",
+    "logo_url": "/assets/logo.svg",
+    "address": "123 Main St, City, ST"
+  },
+  "seo": {
+    "title": "Your Brand Store",
+    "description": "Digital products that sell themselves.",
+    "keywords": [
+      "digital",
+      "templates",
+      "courses"
+    ]
+  },
+  "hero": {
+    "headline": "Build once. Sell for years.",
+    "subhead": "Launch your digital product store in minutes.",
+    "cta": "Shop Now"
+  },
+  "features": [
+    {
+      "title": "Zero Inventory",
+      "body": "Sell high-converting digital products without shipping."
+    },
+    {
+      "title": "Fast Setup",
+      "body": "Your site is live in minutes with AI-written copy."
+    },
+    {
+      "title": "Great Payouts",
+      "body": "Earn generous commissions on every sale."
+    }
+  ],
+  "products": [
+    {
+      "title": "YouTube Million-View Machine",
+      "price": "97",
+      "blurb": "Scripts, thumbnails and systems for viral growth.",
+      "image_url": "",
+      "commission_pct": 80,
+      "buy_url": "https://gogetterai.store/checkout/youtube-million?store=demo"
+    },
+    {
+      "title": "AI Automation for Dummies",
+      "price": "97",
+      "blurb": "Plug-and-play automations for creators and shops.",
+      "image_url": "",
+      "commission_pct": 80,
+      "buy_url": "https://gogetterai.store/checkout/automation-dummies?store=demo"
+    },
+    {
+      "title": "Prompt-to-Profit Templates",
+      "price": "97",
+      "blurb": "Notion/Canva/Sheets templates that sell.",
+      "image_url": "",
+      "commission_pct": 80,
+      "buy_url": "https://gogetterai.store/checkout/prompt-to-profit?store=demo"
+    }
+  ],
+  "about": {
+    "headline": "About Us",
+    "body_md": "We help creators launch profitable digital stores with zero inventory."
+  },
+  "faq": [
+    {
+      "q": "How do I get paid?",
+      "a": "You earn a commission for every sale tracked through your site."
+    },
+    {
+      "q": "Can I change products later?",
+      "a": "Yes. Update your selection in the dashboard and redeploy."
+    }
+  ],
+  "policies": {
+    "refund_md": "<p>All sales final unless otherwise stated.</p>",
+    "privacy_md": "<p>We respect your privacy.</p>",
+    "terms_md": "<p>By using this site you agree to our terms.</p>"
+  },
+  "social": {
+    "email": "hello@example.com"
+  }
+}

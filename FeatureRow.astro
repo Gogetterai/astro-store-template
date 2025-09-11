@@ -1,0 +1,13 @@
+---
+const { features=[] } = Astro.props;
+---
+<section class="container" style="margin-top:2rem">
+  <div class="grid cols-3">
+    {features.map(f => (
+      <div class="card">
+        <h3 style="margin-top:.25rem">{f.title}</h3>
+        <p style="color:#475569">{f.body}</p>
+      </div>
+    ))}
+  </div>
+</section>

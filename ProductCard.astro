@@ -1,0 +1,12 @@
+---
+const { product } = Astro.props;
+---
+<article class="card">
+  <h3 style="margin:.25rem 0">{product.title}</h3>
+  <p style="color:#475569">{product.blurb}</p>
+  <div style="display:flex; align-items:center; gap:.5rem; margin:.5rem 0;">
+    <strong>${product.price}</strong>
+    <span style="color:#0f766e; background:#ecfeff; padding:.15rem .5rem; border-radius:.5rem">{product.commission_pct}% commission</span>
+  </div>
+  <a class="btn secondary" href={product.buy_url}>Buy</a>
+</article>
