@@ -1,0 +1,24 @@
+---
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../../data/site.json';
+const { brand, seo, policies } = site;
+---
+<!doctype html>
+<html lang="en">
+  <Head seo={seo} />
+  <body>
+    <Header brand={brand} />
+    <main class="container">
+      <h1>Policies</h1>
+      <h2>Refunds</h2>
+      <p set:html={policies?.refund_md || ''} />
+      <h2>Privacy</h2>
+      <p set:html={policies?.privacy_md || ''} />
+      <h2>Terms</h2>
+      <p set:html={policies?.terms_md || ''} />
+    </main>
+    <Footer brand={brand} />
+  </body>
+</html>
