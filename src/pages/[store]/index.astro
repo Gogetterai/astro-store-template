@@ -1,0 +1,23 @@
+---
+import StorePage from '../../components/StorePage.astro';
+
+// Build-time discovery of tenant JSON files and slugs
+export async function getStaticPaths() {
+  // Eager import all tenant JSON files at build time
+  const modules = import.meta.glob('../../../data/tenants/*.json', { eager: true });
+
+  // Produce one page per tenant: /<slug>
+  return Object.entries(modules).map(([path, mod]) => {
+    const filename = path.split('/').pop() || '';
+    const slug = filename.replace(/\.json$/i, '');
+
+    return {
+      params: { store: slug },
+      props: { site: (mod as any).default },
+    };
+  });
+}
+
+const { site } = Astro.props;
+---
+<StorePage site={site} />
