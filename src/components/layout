@@ -1,0 +1,11 @@
+---
+import Seo from './Seo.astro';
+const { seo, canonical, jsonLd } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <Seo seo={seo} canonical={canonical} jsonLd={jsonLd} />
+  <body>
+    <slot />
+  </body>
+</html>
