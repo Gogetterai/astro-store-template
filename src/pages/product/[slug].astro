@@ -1,0 +1,107 @@
+---
+import Head from '../../components/Head.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import site from '../../../data/site.json';
+
+const { slug } = Astro.params;
+const product = site.products.find(p => p.slug === slug);
+
+if (!product) {
+  throw new Error(`Product not found: ${slug}`);
+}
+
+const {
+  title, blurb, price, image_url = '/public/assets/placeholder.png',
+  buy_url, outcomes = [], syllabus = [], rating = 4.8, rating_count = 120,
+  level = 'All levels', category = 'Business', duration = '3–6 hours',
+} = product;
+
+const pageSeo = {
+  title: `${title} — GoGetterAI`,
+  description: blurb,
+  image: image_url,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <Head seo={pageSeo} />
+  <body>
+    <Header brand={site.brand} />
+
+    <main class="wrap">
+      <section class="hero">
+        <img src={image_url} alt={`${title} cover`} />
+        <div class="hcopy">
+          <h1>{title}</h1>
+          <p class="lead">{blurb}</p>
+          <ul class="facts">
+            <li>⭐ {rating} ({rating_count})</li>
+            <li>⏱ {duration}</li>
+            <li>🏷 {level}</li>
+            <li>📂 {category}</li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href={buy_url} rel="nofollow">Buy — ${price}</a>
+            <a class="btn ghost" href="/#products">Back to all</a>
+          </div>
+        </div>
+      </section>
+
+      {outcomes.length > 0 && (
+        <section>
+          <h2>What you’ll be able to do</h2>
+          <ul class="bullets">
+          {outcomes.map(o => <li>{o}</li>)}
+          </ul>
+        </section>
+      )}
+
+      {syllabus.length > 0 && (
+        <section>
+          <h2>Inside the course</h2>
+          <ol class="syllabus">
+          {syllabus.map(item => <li>{item}</li>)}
+          </ol>
+        </section>
+      )}
+    </main>
+
+    <Footer brand={site.brand} />
+
+    <!-- Course JSON-LD -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        name: title,
+        description: blurb,
+        image: image_url,
+        provider: { '@type': 'Organization', name: 'GoGetterAI', sameAs: 'https://gogetterai.store' },
+        hasCourseInstance: [{
+          '@type': 'CourseInstance',
+          courseMode: 'online',
+          location: { '@type': 'VirtualLocation', url: buy_url }
+        }]
+      })}
+    </script>
+
+    <style>
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
+      .hero { display:grid; grid-template-columns: 1.1fr 1fr; gap:1.5rem; align-items:center; }
+      .hero img { width:100%; border-radius:16px; border:1px solid #1f2b3e; }
+      .lead { color:#c7cfdd; font-size:1.1rem; }
+      .facts { display:flex; gap:1rem; margin:.75rem 0 1rem; flex-wrap:wrap; }
+      .bullets { columns:2; gap:1.5rem; }
+      .bullets li { break-inside:avoid; margin:.35rem 0; }
+      .syllabus { counter-reset: step; list-style:none; padding:0; }
+      .syllabus li { margin:.5rem 0; padding-left:.75rem; position:relative; }
+      .syllabus li::before { counter-increment: step; content: counter(step) "."; position:absolute; left:0; color:#5BE1C5; }
+      .btn { display:inline-flex; align-items:center; padding:.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:700; }
+      .btn.primary { background:#5BE1C5; color:#0e1a2b; }
+      .btn.ghost { border:1px solid #3B4758; color:#e9eef5; margin-left:.5rem; }
+      @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } }
+    </style>
+  </body>
+</html>
