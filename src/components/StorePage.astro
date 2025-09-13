@@ -1,32 +1,99 @@
 ---
-import Head from '../components/Head.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import FeatureRow from '../components/FeatureRow.astro';
-import ProductCard from '../components/ProductCard.astro';
-import FAQ from '../components/FAQ.astro';
-import Footer from '../components/Footer.astro';
+import Head from './Head.astro';
+import Header from './Header.astro';
+import FeatureRow from './FeatureRow.astro';
+import ProductCard from './ProductCard.astro';
+import FAQ from './FAQ.astro';
+import Footer from './Footer.astro';
 
-// Expect a full "site" object as a prop
 const { site } = Astro.props;
 const { brand, seo, hero, features, products, faq } = site;
 ---
+
 <!doctype html>
 <html lang="en">
   <Head seo={seo} />
   <body>
     <Header brand={brand} />
-    <Hero hero={hero} />
+
+    <!-- Hero -->
+    <section class="hero container">
+      <div>
+        <h1>{hero?.headline ?? 'High-converting digital products, ready to sell'}</h1>
+        <p class="sub">{hero?.subhead ?? 'Pick three, launch today, get paid on every sale.'}</p>
+        <div class="controls">
+          <input id="q" type="search" placeholder="Search courses…" />
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price ↑</option>
+            <option value="price-desc">Price ↓</option>
+            <option value="rating-desc">Rating</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature strip -->
     <FeatureRow features={features} />
 
-    <section id="products" class="container" style="margin-top:2rem">
+    <!-- Catalog -->
+    <section id="products" class="container">
       <h2>Products</h2>
-      <div class="grid cols-3">
-        {products?.map((p) => <ProductCard product={p} />)}
+      <div id="grid" class="grid">
+        {products.map(p => <ProductCard product={p} />)}
       </div>
     </section>
 
     <FAQ faq={faq} />
     <Footer brand={brand} />
+
+    <script is:inline>
+      // lightweight client filter/sort
+      const q = document.getElementById('q');
+      const sort = document.getElementById('sort');
+      const grid = document.getElementById('grid');
+
+      function readCards() {
+        return [...grid.children].map(el => ({
+          el,
+          title: el.querySelector('.title')?.textContent?.toLowerCase() ?? '',
+          price: Number(el.querySelector('[itemprop="price"]')?.textContent ?? 0),
+          rating: Number((el.querySelector('.rating small')?.textContent ?? '0').split(' ')[0]),
+        }));
+      }
+
+      function apply() {
+        const needle = (q.value || '').toLowerCase();
+        let cards = readCards();
+
+        // filter
+        cards.forEach(c => { c.el.style.display = c.title.includes(needle) ? '' : 'none'; });
+
+        // sort visible
+        let visibles = cards.filter(c => c.el.style.display !== 'none');
+        const sortVal = sort.value;
+        if (sortVal === 'price-asc') visibles.sort((a,b)=>a.price-b.price);
+        if (sortVal === 'price-desc') visibles.sort((a,b)=>b.price-a.price);
+        if (sortVal === 'rating-desc') visibles.sort((a,b)=>b.rating-a.rating);
+
+        visibles.forEach(v => grid.appendChild(v.el));
+      }
+
+      q?.addEventListener('input', apply);
+      sort?.addEventListener('change', apply);
+    </script>
+
+    <style>
+      .container { max-width:1100px; margin:0 auto; padding:1.25rem; }
+      .hero { padding-top: .75rem; }
+      .sub { color:#c7cfdd; }
+      .controls { display:flex; gap:.5rem; margin:1rem 0 0; }
+      input[type="search"], select {
+        background:#0e1a2b; color:#e9eef5; border:1px solid #3B4758; border-radius:10px;
+        padding:.65rem .75rem; min-width: 180px;
+      }
+      .grid { --min: 260px; display:grid; gap:1rem; grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr)); }
+    </style>
   </body>
 </html>
+
