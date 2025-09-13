@@ -1,24 +1,82 @@
 ---
-const { seo } = Astro.props;
+/** Head.astro  — merged: SEO + your styles + favicon + keywords support
+ * Usage: <Head seo={seo} />
+ * Optional seo fields: { title, description, image, keywords[], canonical, index }
+ */
+const { seo = {} } = Astro.props;
+
+// Values with fallbacks
+const title = seo.title ?? 'GoGetterAI';
+const description = seo.description ?? 'Digital products ready to sell.';
+const image = seo.image ?? '/assets/social-card.png';
+const keywords = Array.isArray(seo.keywords) ? seo.keywords.join(', ') : '';
+const index = seo.index ?? true;
+
+// Canonical: prefer explicit canonical; else build from Astro.site + current path; else fallback
+const canonical =
+  seo.canonical ??
+  (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : 'https://sites.gogetterai.store');
 ---
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>{seo?.title || 'Store'}</title>
-  <meta name="description" content={seo?.description || ''} />
-  <meta name="keywords" content={(seo?.keywords || []).join(', ')} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {keywords && <meta name="keywords" content={keywords} />}
+
+  <!-- robots -->
+  <meta name="robots" content={index ? 'index,follow' : 'noindex,nofollow'} />
+
+  <!-- canonical -->
+  <link rel="canonical" href={canonical} />
+
+  <!-- favicon -->
   <link rel="icon" href="/assets/logo.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'GoGetterAI',
+      url: canonical,
+      logo: '/assets/logo.svg'
+    })}
+  </script>
+
+  <!-- Your existing global styles kept here -->
   <style>
     :root { --brand:#0E1A2B; --mint:#5BE1C5; --slate:#3B4758; }
-    body { font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif; margin:0; color:#0f172a; }
+    body {
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      margin:0; color:#0f172a;
+      background: #0b1422; /* better dark base for your theme */
+    }
     .container { max-width:1100px; margin:0 auto; padding:1.25rem; }
     .btn { background:var(--brand); color:white; padding:.8rem 1rem; border-radius:.75rem; text-decoration:none; display:inline-block; }
     .btn.secondary { background:var(--mint); color:#0E1A2B; }
-    .card { background:white; border-radius:1rem; padding:1rem; box-shadow:0 6px 24px rgba(15,23,42,.08); }
+    .card { background:#0e1a2b; color:#e9eef5; border:1px solid #1f2b3e; border-radius:1rem; padding:1rem; box-shadow:0 6px 24px rgba(0,0,0,.18); }
     .grid { display:grid; gap:1rem; }
-    @media(min-width:900px){ .grid.cols-3{ grid-template-columns:repeat(3,1fr); } .grid.cols-2{ grid-template-columns:repeat(2,1fr);} }
+    @media (min-width:900px) {
+      .grid.cols-3 { grid-template-columns:repeat(3,1fr); }
+      .grid.cols-2 { grid-template-columns:repeat(2,1fr); }
+    }
     header.site { display:flex; align-items:center; gap:1rem; padding:1rem 0; }
     header.site img.logo { width:40px; height:40px; }
-    footer.site { margin-top:3rem; padding:2rem 0; color:#334155; }
+    footer.site { margin-top:3rem; padding:2rem 0; color:#c7cfdd; }
   </style>
 </head>
