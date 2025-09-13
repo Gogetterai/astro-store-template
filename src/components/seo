@@ -1,0 +1,54 @@
+---
+export interface Props {
+  seo: { title: string; description: string; keywords?: string[] };
+  canonical?: string;
+  jsonLd?: any;
+}
+
+const { seo, canonical, jsonLd } = Astro.props;
+const title = seo?.title ?? "GoGetterAI Store";
+const description = seo?.description ?? "";
+const keywords = (seo?.keywords ?? []).join(", ");
+---
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {keywords && <meta name="keywords" content={keywords} />}
+
+  {canonical && <link rel="canonical" href={canonical} />}
+
+  <!-- OpenGraph / Twitter -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical ?? ''} />
+  <meta property="og:site_name" content="GoGetterAI Store" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  {jsonLd && (
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLd)}
+    </script>
+  )}
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preload" href="/assets/logo.svg" as="image" />
+  <style>
+    :root { --accent:#5BE1C5; --ink:#0E1A2B; --muted:#3B4758; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: var(--ink); margin:0; background:#fff; }
+    .container { max-width: 1120px; margin:0 auto; padding: 0 1rem; }
+    .grid { display:grid; gap:1rem; }
+    .cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    @media (max-width: 920px){ .cols-3{ grid-template-columns: 1fr; } }
+    .btn { display:inline-block; background:var(--accent); color:#00221a; padding:.85rem 1.1rem; border-radius:.75rem; font-weight:700; text-decoration:none; }
+    .card { border:1px solid #e9eef3; border-radius:1rem; padding:1rem; background:#fff; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+    .price { font-size:1.5rem; font-weight:800; }
+    .strike { text-decoration: line-through; opacity:.6; margin-left:.5rem; font-weight:500; }
+    .tag { font-size:.75rem; padding:.2rem .5rem; border:1px solid #e9eef3; border-radius:1rem; }
+    header.nav { border-bottom:1px solid #eef2f6; }
+    a { color: var(--ink); }
+  </style>
+</head>
