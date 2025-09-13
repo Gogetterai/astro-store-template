@@ -1,83 +1,115 @@
 {
   "brand": {
-    "name": "Your Brand",
-    "logo_url": "/assets/logo.svg",
-    "address": "123 Main St, City, ST"
+    "name": "GoGetterAI Stores",
+    "domain": "gogetterai.store",
+    "email": "hello@gogetterai.store",
+    "logo_url": "/assets/logo.svg"
   },
+  "plan": "starter",
+  "selectedCourseSlugs": ["youtube-million", "ai-automation-dummies", "prompt-to-profit"],
   "seo": {
-    "title": "Your Brand Store",
-    "description": "Digital products that sell themselves.",
-    "keywords": [
-      "digital",
-      "templates",
-      "courses"
-    ]
+    "title": "Launch Your AI Course Store in Minutes",
+    "description": "Pick your courses, we build the store. Conversion-ready pages, SEO best practices, and instant checkout links.",
+    "keywords": ["AI courses", "sell digital products", "automation", "YouTube growth", "templates"]
   },
+  "nav": [
+    { "label": "Courses", "href": "#courses" },
+    { "label": "Testimonials", "href": "#love" },
+    { "label": "FAQ", "href": "#faq" }
+  ],
   "hero": {
-    "headline": "Build once. Sell for years.",
-    "subhead": "Launch your digital product store in minutes.",
-    "cta": "Shop Now"
+    "headline": "High-converting AI courses, ready to sell",
+    "subhead": "Choose up to 3 to start (Starter) or unlock the full catalog (Pro). Pages are auto-written and SEO-ready.",
+    "cta_label": "Start Selling",
+    "cta_href": "#courses",
+    "image": "/public/hero.jpg",
+    "badges": ["No inventory", "Instant delivery", "Keep control"]
   },
   "features": [
-    {
-      "title": "Zero Inventory",
-      "body": "Sell high-converting digital products without shipping."
-    },
-    {
-      "title": "Fast Setup",
-      "body": "Your site is live in minutes with AI-written copy."
-    },
-    {
-      "title": "Great Payouts",
-      "body": "Earn generous commissions on every sale."
-    }
+    { "title": "One-click content", "body": "We fill headlines, benefits, FAQs and SEO snippets with AI." },
+    { "title": "Trusted layouts", "body": "Above-the-fold hero, social proof, sticky CTA and clear pricing." },
+    { "title": "SEO included", "body": "Schema, open graph, canonical, sitemap.xml and robots.txt." }
   ],
-  "products": [
+  "testimonials": [
+    { "name": "Maya R.", "quote": "I picked 3 courses and had a store live in 15 minutes. My first sale was the same day!" }
+  ],
+  "faqs": [
+    { "q": "How do payouts work?", "a": "You receive payouts directly from your payment provider for each sale." },
+    { "q": "Can I change my courses later?", "a": "Yes—update your selection and redeploy." }
+  ],
+  "courses": [
     {
+      "slug": "youtube-million",
       "title": "YouTube Million-View Machine",
-      "price": "97",
-      "blurb": "Scripts, thumbnails and systems for viral growth.",
-      "image_url": "",
-      "commission_pct": 80,
-      "buy_url": "https://gogetterai.store/checkout/youtube-million?store=demo"
+      "price": 97,
+      "compareAt": 197,
+      "image": "/public/courses/youtube.jpg",
+      "thumbnail": "/public/courses/youtube-thumb.jpg",
+      "short": "Scripts, thumbnails & systems for viral growth.",
+      "bullets": [
+        "Proven hook formulas & title frameworks",
+        "Thumbnail patterns that lift CTR",
+        "Publishing cadence & analytics tracking"
+      ],
+      "outcomes": [
+        "Publish consistently with repeatable systems",
+        "Lift CTR and watch time with data-backed tweaks",
+        "Turn views into subscribers and sales"
+      ],
+      "modules": [
+        { "name": "Hook & Title Engine", "items": ["40+ hooks", "Headline scorecards"] },
+        { "name": "Thumbnail Lab", "items": ["Swipe file", "Editable PSD/Canva"] },
+        { "name": "Publishing OS", "items": ["Calendar", "Analytics boards"] }
+      ],
+      "cta": { "label": "Start selling", "href": "https://gogetterai.store/checkout/youtube-million?store=demo" },
+      "seo": {
+        "title": "YouTube Million-View Machine — Course",
+        "description": "A repeatable system for viral-ready content: hooks, thumbnails, analytics and cadence.",
+        "tags": ["YouTube growth", "content system"]
+      }
     },
     {
+      "slug": "ai-automation-dummies",
       "title": "AI Automation for Dummies",
-      "price": "97",
-      "blurb": "Plug-and-play automations for creators and shops.",
-      "image_url": "",
-      "commission_pct": 80,
-      "buy_url": "https://gogetterai.store/checkout/automation-dummies?store=demo"
+      "price": 97,
+      "compareAt": 197,
+      "image": "/public/courses/automation.jpg",
+      "thumbnail": "/public/courses/automation-thumb.jpg",
+      "short": "Plug-and-play automations for creators and shops.",
+      "bullets": ["Inbox triage", "Lead capture & routing", "Order follow-ups"],
+      "outcomes": ["Save 5–10 hours/week", "Reduce errors", "Scale personalization"],
+      "modules": [
+        { "name": "Foundation", "items": ["Prompt kits", "Zapier/Make recipes"] },
+        { "name": "Commerce", "items": ["Abandoned cart", "Review requests"] }
+      ],
+      "cta": { "label": "Start selling", "href": "https://gogetterai.store/checkout/automation-dummies?store=demo" },
+      "seo": {
+        "title": "AI Automation for Dummies — Course",
+        "description": "Ready-made automations for busy creators and shops.",
+        "tags": ["automation", "zapier", "make"]
+      }
     },
     {
+      "slug": "prompt-to-profit",
       "title": "Prompt-to-Profit Templates",
-      "price": "97",
-      "blurb": "Notion/Canva/Sheets templates that sell.",
-      "image_url": "",
-      "commission_pct": 80,
-      "buy_url": "https://gogetterai.store/checkout/prompt-to-profit?store=demo"
+      "price": 97,
+      "compareAt": 197,
+      "image": "/public/courses/prompts.jpg",
+      "thumbnail": "/public/courses/prompts-thumb.jpg",
+      "short": "Notion/Canva/Sheets templates that sell.",
+      "bullets": ["100+ prompts", "Editable templates", "Use cases & examples"],
+      "outcomes": ["Ship faster", "Standardize quality", "Sell with confidence"],
+      "modules": [
+        { "name": "Prompt Vault", "items": ["Copy, ads, SOPs"] },
+        { "name": "Template Pack", "items": ["Notion, Canva, Sheets"] }
+      ],
+      "cta": { "label": "Start selling", "href": "https://gogetterai.store/checkout/prompt-to-profit?store=demo" },
+      "seo": {
+        "title": "Prompt-to-Profit Templates — Course",
+        "description": "100+ prompts & templates to productize your skills.",
+        "tags": ["prompts", "templates"]
+      }
     }
-  ],
-  "about": {
-    "headline": "About Us",
-    "body_md": "We help creators launch profitable digital stores with zero inventory."
-  },
-  "faq": [
-    {
-      "q": "How do I get paid?",
-      "a": "You earn a commission for every sale tracked through your site."
-    },
-    {
-      "q": "Can I change products later?",
-      "a": "Yes. Update your selection in the dashboard and redeploy."
-    }
-  ],
-  "policies": {
-    "refund_md": "<p>All sales final unless otherwise stated.</p>",
-    "privacy_md": "<p>We respect your privacy.</p>",
-    "terms_md": "<p>By using this site you agree to our terms.</p>"
-  },
-  "social": {
-    "email": "hello@example.com"
-  }
+  ]
 }
+
